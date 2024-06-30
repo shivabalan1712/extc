@@ -1,0 +1,14 @@
+<resources>
+    <string-array name="transaction_types">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+
+    <string-array name="transaction_categories">
+        <item>Food</item>
+        <item>Shopping</item>
+        <item>Travel</item>
+        <item>Medical</item>
+        <item>Others</item>
+    </string-array>
+</resources>

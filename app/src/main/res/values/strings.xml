@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Expense Tracker</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="add">Add</string>
+    <string name="analytics">Analytics</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="select_date">Select Date</string>
+    <string name="no_date_selected">No date selected</string>
+</resources>
