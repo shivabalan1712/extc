@@ -380,5 +380,584 @@ activity_main.xml
         android:textSize="30dp" />
 </LinearLayout>
 
+===================================================================
+write data to sd card
+==================================================================
+?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="20dp"
+    android:orientation="vertical">
+ 
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="30dp" />
+ 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Write Data"
+        android:textSize="30dp" />
+ 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Read data"
+        android:textSize="30dp" />
+ 
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Clear"
+        android:textSize="30dp" />
+ 
+</LinearLayout>
+
+
+-------------------------------------------------------------------
+chnages to make in manifest
+
+
+manifest.xml
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.exno9" >
+ 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+ 
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+ 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
+
+--------------------------------------------------
+ activty_main.xml
+ 
+ ----------------------------------------------------
+ package com.example.exno9;
+ 
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+ 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+ 
+public class MainActivity extends AppCompatActivity
+{
+    EditText e1;
+    Button write,read,clear;
+    @Override
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+ 
+        e1= (EditText) findViewById(R.id.editText);
+        write= (Button) findViewById(R.id.button);
+        read= (Button) findViewById(R.id.button2);
+        clear= (Button) findViewById(R.id.button3);
+ 
+        write.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String message=e1.getText().toString();
+                try
+                {
+                    File f=new File("/sdcard/myfile.txt");
+                    f.createNewFile();
+                    FileOutputStream fout=new FileOutputStream(f);
+                    fout.write(message.getBytes());
+                    fout.close();
+                    Toast.makeText(getBaseContext(),"Data Written in SDCARD",Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(getBaseContext(),e.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+ 
+        read.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                String message;
+                String buf = "";
+                try
+                {
+                    File f = new File("/sdcard/myfile.txt");
+                    FileInputStream fin = new FileInputStream(f);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(fin));
+                    while ((message = br.readLine()) != null)
+                    {
+                        buf += message;
+                    }
+                    e1.setText(buf);
+                    br.close();
+                    fin.close();
+                    Toast.makeText(getBaseContext(),"Data Recived from SDCARD",Toast.LENGTH_LONG).show();
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+ 
+        clear.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                e1.setText("");
+            }
+        });
+    }
+}
+==================================================================================
+simple graphical primitive
+=============================================================
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+ 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView" />
+</RelativeLayout>
+
+=============================================================
+
+package com.example.exno4;
+ 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
+import android.widget.ImageView;
+ 
+public class MainActivity extends Activity 
+{
+    @Override
+    public void onCreate(Bundle savedInstanceState) 
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+ 
+        //Creating a Bitmap
+        Bitmap bg = Bitmap.createBitmap(720, 1280, Bitmap.Config.ARGB_8888);
+ 
+        //Setting the Bitmap as background for the ImageView
+        ImageView i = (ImageView) findViewById(R.id.imageView);
+        i.setBackgroundDrawable(new BitmapDrawable(bg));
+ 
+        //Creating the Canvas Object
+        Canvas canvas = new Canvas(bg);
+ 
+        //Creating the Paint Object and set its color & TextSize
+        Paint paint = new Paint();
+        paint.setColor(Color.BLUE);
+        paint.setTextSize(50);
+ 
+        //To draw a Rectangle
+        canvas.drawText("Rectangle", 420, 150, paint);
+        canvas.drawRect(400, 200, 650, 700, paint);
+ 
+        //To draw a Circle
+        canvas.drawText("Circle", 120, 150, paint);
+        canvas.drawCircle(200, 350, 150, paint);
+ 
+        //To draw a Square
+        canvas.drawText("Square", 120, 800, paint);
+        canvas.drawRect(50, 850, 350, 1150, paint);
+ 
+        //To draw a Line
+        canvas.drawText("Line", 480, 800, paint);
+        canvas.drawLine(520, 850, 520, 1150, paint);
+    }
+}
+
+
+===========================================================================================
+
+animation
+==============================================================================================
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/gfgimage" />
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageview"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        
+        <!--To start the blink animation of the image-->
+        <Button
+            android:id="@+id/BTNblink"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:text="@string/blink"
+            android:textColor="@color/white" />
+
+        <!--To start the rotate animation of the image-->
+        <Button
+            android:id="@+id/BTNrotate"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:text="@string/clockwise"
+            android:textColor="@color/white" />
+
+        <!--To start the fading animation of the image-->
+        <Button
+            android:id="@+id/BTNfade"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:text="@string/fade"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear1"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <!--To start the move animation of the image-->
+        <Button
+            android:id="@+id/BTNmove"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:text="@string/move"
+            android:textColor="@color/white" />
+
+        <!--To start the slide animation of the image-->
+        <Button
+            android:id="@+id/BTNslide"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:text="@string/slide"
+            android:textColor="@color/white" />
+
+        <!--To start the zoom animation of the image-->
+        <Button
+            android:id="@+id/BTNzoom"
+            style="@style/TextAppearance.AppCompat.Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:padding="3dp"
+            android:text="@string/zoom"
+            android:textColor="@color/white" />
+      
+    </LinearLayout>
+
+    <!--To stop the animation of the image-->
+    <Button
+        android:id="@+id/BTNstop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear2"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/stop_animation" />
+
+</RelativeLayout>
+--------------------------
+blink animation
+-----------------------
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:duration="500"
+        android:repeatMode="reverse"
+        android:repeatCount="infinite"/>
+</set>
+------------------------
+fade animation
+---------------------------
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/accelerate_interpolator">
+    
+    <!-- duration is the time for which animation will work-->
+    <alpha
+        android:duration="1000"
+        android:fromAlpha="0"
+        android:toAlpha="1" />
+
+    <alpha
+        android:duration="1000"
+        android:fromAlpha="1"
+        android:startOffset="2000"
+        android:toAlpha="0" />
+
+</set>
+-----------------------
+move animation
+-----------------------
+<?xml version="1.0" encoding="utf-8"?>
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/linear_interpolator"
+    android:fillAfter="true">
+
+    <translate
+        android:fromXDelta="0%p"
+        android:toXDelta="75%p"
+        android:duration="700" />
+</set>
+-------------------
+rotate animation
+---------------
+<?xml version="1.0" encoding="utf-8"?>
+<set 
+     xmlns:android="http://schemas.android.com/apk/res/android">
+    <rotate
+        android:duration="6000"
+        android:fromDegrees="0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toDegrees="360" />
+
+    <rotate
+        android:duration="6000"
+        android:fromDegrees="360"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="5000"
+        android:toDegrees="0" />
+
+</set>
+---------------------
+slide animation
+--------------------
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:fillAfter="true" >
+    <scale
+        android:duration="500"
+        android:fromXScale="1.0"
+        android:fromYScale="1.0"
+        android:interpolator="@android:anim/linear_interpolator"
+        android:toXScale="1.0"
+        android:toYScale="0.0" />
+</set>
+-------------------
+zoom animation
+-----------------
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fillAfter="true" >
+  
+    <scale
+        android:interpolator="@android:anim/linear_interpolator"
+        android:duration = "1000"
+        android:fromXScal = "1"
+        android:fromYScale = "1"
+        android:pivotX = "50%"
+        android:pivotY = "50%"
+        android:toXScale = "2"
+        android:toYScale = "2"/>
+</set>
+---------------------
+mainactivity.java
+--------------------
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+
+    // Declare ImageView and Buttons
+    ImageView imageView;
+    Button blinkBTN, rotateBTN, fadeBTN, moveBTN, slideBTN, zoomBTN, stopBTN;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        // Initialize ImageView and Buttons using their IDs
+        imageView = findViewById(R.id.imageview);
+        blinkBTN = findViewById(R.id.BTNblink);
+        rotateBTN = findViewById(R.id.BTNrotate);
+        fadeBTN = findViewById(R.id.BTNfade);
+        moveBTN = findViewById(R.id.BTNmove);
+        slideBTN = findViewById(R.id.BTNslide);
+        zoomBTN = findViewById(R.id.BTNzoom);
+        stopBTN = findViewById(R.id.BTNstop);
+
+        // Set up click listener for blink button to start blink animation
+        blinkBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Load blink animation and start it on the ImageView
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
+                                                                   , R.anim.blink_animation);
+                imageView.startAnimation(animation);
+            }
+        });
+
+        // Set up click listener for rotate button to start rotate animation
+        rotateBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Load rotate animation and start it on the ImageView
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
+                                                                   , R.anim.rotate_animation);
+                imageView.startAnimation(animation);
+            }
+        });
+
+        // Set up click listener for fade button to start fade animation
+        fadeBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Load fade animation and start it on the ImageView
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
+                                                                   , R.anim.fade_animation);
+                imageView.startAnimation(animation);
+            }
+        });
+
+        // Set up click listener for move button to start move animation
+        moveBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Load move animation and start it on the ImageView
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
+                                                                   , R.anim.move_animation);
+                imageView.startAnimation(animation);
+            }
+        });
+
+        // Set up click listener for slide button to start slide animation
+        slideBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Load slide animation and start it on the ImageView
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
+                                                                   , R.anim.slide_animation);
+                imageView.startAnimation(animation);
+            }
+        });
+
+        // Set up click listener for zoom button to start zoom animation
+        zoomBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Load zoom animation and start it on the ImageView
+                Animation animation = AnimationUtils.loadAnimation(getApplicationContext()
+                                                                   , R.anim.zoom_animation);
+                imageView.startAnimation(animation);
+            }
+        });
+
+        // Set up click listener for stop button to clear any ongoing animation
+        stopBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear the animation on the ImageView
+                imageView.clearAnimation();
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
 
 
