@@ -25,13 +25,48 @@
             android:textSize="24sp" />
     </FrameLayout>
 
+    <TextView
+        android:id="@+id/totalIncomeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Income: Rs 0"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="end"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/totalExpenditureTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Expenditure: Rs 0"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="end"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/balanceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Balance: Rs 0"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="end"
+        android:padding="8dp" />
+
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textOff="Show Expense"
-        android:textOn="Show Income"
+        android:textOff="Showing Expense"
+        android:textOn="Showing Income"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"
         android:layout_gravity="center"/>
 
     <com.github.mikephil.charting.charts.PieChart
@@ -39,4 +74,5 @@
         android:layout_width="338dp"
         android:layout_height="465dp"
         android:layout_marginTop="16dp" />
+
 </LinearLayout>

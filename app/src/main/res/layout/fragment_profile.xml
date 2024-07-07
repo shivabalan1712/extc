@@ -1,47 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
         android:id="@+id/profileNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name: "
-        android:layout_marginTop="80dp"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="150dp"/>
 
     <TextView
         android:id="@+id/profileEmailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email: "
-        android:layout_below="@id/profileNameTextView"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="16dp"/>
 
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:layout_below="@id/profileEmailTextView"
-        android:layout_marginTop="32dp"
-        android:layout_centerHorizontal="true"/>
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"/>
 
     <Button
         android:id="@+id/viewLocationButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Location"
-        android:layout_below="@id/logoutButton"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="@color/white"
+        android:backgroundTint="@color/black"/>
 
     <FrameLayout
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_below="@id/viewLocationButton"
+        android:layout_margin="10dp"
         android:layout_marginTop="16dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cred"
+        android:text="Credentials"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nam"
+        android:text="Shiva Balan K"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" © copy rights 2024"
+        android:textColor="@color/white"
+        android:textSize="10sp"/>
 
-</RelativeLayout>
+</LinearLayout>
