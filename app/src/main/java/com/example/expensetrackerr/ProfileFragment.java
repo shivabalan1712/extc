@@ -1,6 +1,7 @@
 package com.example.expensetrackerr;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,10 +53,12 @@ public class ProfileFragment extends Fragment implements OnMapReadyCallback {
 
         // Handle view location button click
         viewLocationButton.setOnClickListener(v -> {
-            // Navigate to view location or perform other actions
+             // Navigate to view location or perform other actions
             // For Google Maps, you would typically show the map here
             // You can update this according to your use case
-            // Example: showMapAtLocation();
+            double latitude = 9.9208656;
+            double longitude = 78.1272326;
+            showMapAtLocation(latitude,longitude);
         });
 
         // Initialize Google Map fragment
@@ -68,7 +71,15 @@ public class ProfileFragment extends Fragment implements OnMapReadyCallback {
 
         return view;
     }
+    private void showMapAtLocation(double latitude, double longitude) {
+        Uri gmmIntentUri = Uri.parse("geo:" + latitude + "," + longitude + "?q=" + latitude + "," + longitude + "(Label+Name)");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
 
+        if (mapIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(mapIntent);
+        }
+    }
     private void loadProfileData() {
         if (auth.getCurrentUser() != null) {
             String uid = auth.getCurrentUser().getUid();

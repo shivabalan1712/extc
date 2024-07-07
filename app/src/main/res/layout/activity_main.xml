@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     android:background="@drawable/bg">
 
     <FrameLayout

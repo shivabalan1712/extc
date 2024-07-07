@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,11 +11,25 @@
     android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     tools:context=".Login"
     android:background="@drawable/bg">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#27FFFFFF"
+        app:cardElevation="20dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/card_back">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
         android:textSize="20sp"
+        android:layout_margin="10dp"
         android:textColorHighlight="#ECE8AB"
         android:textStyle="bold"
         android:textColor="@color/white"/>
@@ -26,8 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/email"
+            android:layout_margin="5dp"
+            android:inputType="textEmailAddress"
             android:textColor="@color/white"
-            android:background="#576E7B"
+            android:background="#68131E3A"
             android:hint="Email"/>
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -38,8 +55,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/password"
+            android:layout_margin="5dp"
+            android:inputType="textPassword"
             android:textColor="@color/white"
-            android:background="#576E7B"
+            android:background="#68131E3A"
             android:hint="Password"/>
     </com.google.android.material.textfield.TextInputLayout>
     <Button
@@ -48,6 +67,7 @@
         android:textColor="@color/white"
         android:id="@+id/btn_login"
         android:text="Login"
+        android:elevation="5dp"
         android:shadowColor="@color/black"
         android:backgroundTint="#121D39"/>
     <ProgressBar
@@ -60,10 +80,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textStyle="bold"
+        android:layout_margin="10dp"
         android:textSize="20sp"
         android:id="@+id/click_here_to_register"
         android:textColor="@color/white"
         android:text="Click Here to register"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
 </LinearLayout>

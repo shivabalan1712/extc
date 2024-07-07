@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     android:background="@drawable/card_background"
     android:padding="16dp">
 

@@ -2,6 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar"
     android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -13,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Amount"
+        android:inputType="number"
         android:textColor="@color/white"/>
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -21,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center"
         android:layout_marginTop="16dp">
 
         <RadioButton
@@ -41,6 +44,10 @@
     <Spinner
         android:id="@+id/categorySpinner"
         android:layout_width="match_parent"
+        android:gravity="center"
+        android:soundEffectsEnabled="true"
+        android:elevation="15dp"
+        android:animateLayoutChanges="true"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"/>
     <LinearLayout
