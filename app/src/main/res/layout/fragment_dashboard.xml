@@ -31,9 +31,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Income: Rs 0"
-        android:textColor="@android:color/white"
+        android:textColor="#89FF01"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:layout_gravity="end"
         android:padding="8dp" />
 
@@ -42,9 +42,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Total Expenditure: Rs 0"
-        android:textColor="@android:color/white"
+        android:textColor="#FA7351"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:layout_gravity="end"
         android:padding="8dp" />
 
@@ -53,9 +53,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Balance: Rs 0"
-        android:textColor="@android:color/white"
+        android:textColor="#88BEFF"
         android:textSize="16sp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="5dp"
         android:layout_gravity="end"
         android:padding="8dp" />
 
